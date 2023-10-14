@@ -7,20 +7,24 @@ import Rentals from './components/Rentals'
 import Reserve from './components/Reserve'
 import WhyUs from './components/WhyUs'
 
+import { CarProvider } from './components/CarContext'
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Banner from './components/Banner'
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar></Navbar>
-      <Routes>
-        <Route path='/' element={<><Hero/><Rentals/></>}></Route>
-        <Route path='/reserve' element={<Reserve/>}></Route>
-      </Routes>
-      <Banner></Banner>
-      <WhyUs></WhyUs>
-      <Footer></Footer>
+      <CarProvider>
+        <Navbar></Navbar>
+          <Routes>
+            <Route path='/' element={<><Hero/><Rentals/></>}></Route>
+            <Route path='/reserve' element={<Reserve/>}></Route>
+          </Routes>
+          <Banner></Banner>
+          <WhyUs></WhyUs>
+        <Footer></Footer>
+      </CarProvider>
     </BrowserRouter>
   )
 }
