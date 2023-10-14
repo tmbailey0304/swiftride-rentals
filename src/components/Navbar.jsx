@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 
 import {FaBars, FaTimes} from 'react-icons/fa'
 
+import { Link } from 'react-scroll';
+
 const Navbar = () => {
 
     const [navBar, setNavBar] = useState(false);
@@ -9,11 +11,11 @@ const Navbar = () => {
   return (
     <div className='flex flex-row justify-between lg:justify-evenly py-6 px-8 items-center'>
         <div>
-            <h1 className='text-2xl'>Swiftride Rentals</h1>
+            <h1 className='text-2xl font-bold'>Swiftride Rentals</h1>
         </div>
         <ul className='hidden md:flex flex-row gap-8 font-bold'>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Home</li>
-            <li className='hover:scale-105 duration-500 cursor-pointer'>About</li>
+            <Link to='rent' spy={true} smooth={true} offset={50} duration={500}><li className='hover:scale-105 duration-500 cursor-pointer'>Rent</li></Link>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Contact</li>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Reviews</li>
         </ul>
@@ -21,7 +23,7 @@ const Navbar = () => {
 
         {navBar ? <ul className='md:hidden flex flex-col gap-8 fixed top-0 left-0 w-full h-screen items-center justify-center text-3xl z-40 bg-white'>
             <li>Home</li>
-            <li>About</li>
+            <li>Rent</li>
             <li>Contact</li>
             <li>Reviews</li>
             <li>Sign In</li>
