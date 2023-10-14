@@ -1,12 +1,17 @@
 import React from 'react'
 
+import {MdEmail} from 'react-icons/md'
+import {AiFillPhone} from 'react-icons/ai'
+
 const Footer = () => {
   return (
     <div className='mt-40 pb-2 md:pb-8'>
       <div className='grid md:grid-cols-4 px-6 md:px-12 lg:px-24'>
-        <div className='flex flex-col font-semibold mb-6 md:mb-0'>
+        <div className='flex flex-col gap-2 font-semibold mb-6 md:mb-0'>
           <h1 className='font-bold mb-2 text-2xl'>Swiftride Rentals</h1>
           <p className=' w-2/3'>We offer a wide range of vehicles for all of your driving needs. We guarantee you will find the perfect car to meet your needs</p>
+          <a className='flex flex-row items-center gap-1 font-bold'><AiFillPhone/>(123) 456-7890</a>
+          <a href='mailto:contact@swiftriderentals.com' className='flex flex-row items-center gap-1 font-bold'><MdEmail/>contact@swiftriderentals.com</a>
         </div>
         <div className='flex flex-col gap-2 font-semibold mb-6 md:mb-0'>
           <h1 className='font-bold mb-2 text-2xl'>Company</h1>
