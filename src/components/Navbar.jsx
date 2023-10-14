@@ -15,7 +15,7 @@ const Navbar = () => {
         </div>
         <ul className='hidden md:flex flex-row gap-8 font-bold'>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Home</li>
-            <Link to='rent' spy={true} smooth={true} offset={50} duration={500}><li className='hover:scale-105 duration-500 cursor-pointer'>Rent</li></Link>
+            <Link to='rent' spy={true} smooth={true} offset={0} duration={500}><li className='hover:scale-105 duration-500 cursor-pointer'>Rent</li></Link>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Contact</li>
             <li className='hover:scale-105 duration-500 cursor-pointer'>Reviews</li>
         </ul>

@@ -89,7 +89,7 @@ const Rentals = () => {
     const [selectedCar, setSelectedCar] = useState(carRentals[0])
 
   return (
-    <div id='rent' className='flex flex-col items-center w-full mt-60'>
+    <div id='rent' className='flex flex-col items-center w-full mt-20 md:mt-40'>
         <div className='flex flex-col items-center justify-center'>
             <h2 className='text-2xl font-bold'>Vehicle Models</h2>
             <h1 className='text-4xl font-extrabold'>Our Rental Fleet</h1>
