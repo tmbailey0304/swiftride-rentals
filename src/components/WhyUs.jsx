@@ -7,7 +7,7 @@ import {TbPigMoney} from "react-icons/tb"
 
 const WhyUs = () => {
   return (
-    <div className='flex items-center flex-col my-40'>
+    <div id='about-us' className='flex items-center flex-col my-40'>
         <img src='https://pngimg.com/d/dodge_PNG90.png' alt="" className='w-[60rem] px-8' />
         <div className='grid md:grid-cols-2 items-center justify-items-center lg:px-20 xl:px-40'>
             <div className='flex flex-col items-center my-8'>
