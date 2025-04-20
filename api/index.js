@@ -120,14 +120,53 @@ app.post("/api/vehicles", verifyToken, isAdmin, async (req, res) => {
 // Update Vehicle (Protected)
 app.put("/api/vehicles/:id", verifyToken, isAdmin, async (req, res) => {
   const { id } = req.params;
-  const { make, model, year, available } = req.body;
+  const {
+    img,
+    name,
+    make,
+    model,
+    year,
+    doors,
+    ac,
+    transmission,
+    fuel,
+    price,
+    available,
+  } = req.body;
+
   try {
     await pool.query(
-      "UPDATE vehicles SET make = $1, model = $2, year = $3, available = $4 WHERE id = $5",
-      [make, model, year, available, id]
+      `UPDATE vehicles SET 
+        img = $1,
+        name = $2,
+        make = $3,
+        model = $4,
+        year = $5,
+        doors = $6,
+        ac = $7,
+        transmission = $8,
+        fuel = $9,
+        price = $10,
+        available = $11
+      WHERE id = $12`,
+      [
+        img,
+        name,
+        make,
+        model,
+        year,
+        doors,
+        ac,
+        transmission,
+        fuel,
+        price,
+        available,
+        id,
+      ]
     );
     res.json({ message: "Vehicle updated" });
   } catch (err) {
+    console.error("Update failed:", err);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -170,6 +209,14 @@ app.post("/api/rentals", verifyToken, async (req, res) => {
   }
 });
 
-app.listen(PORT, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
-);
+app.get("/api/ping", (req, res) => {
+  res.json({ message: "pong" });
+});
+
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () =>
+    console.log(`Server running on http://localhost:${PORT}`)
+  );
+}
+
+module.exports = app;

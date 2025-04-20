@@ -1,40 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Field, ErrorMessage, Form } from 'formik';
-import { Link } from 'react-router-dom';
-import * as Yup from 'yup';
-import { useCarContext } from './CarContext';  // Make sure to adjust the import path
+import React, { useState, useEffect } from "react";
+import { Formik, Field, ErrorMessage, Form } from "formik";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { useCarContext } from "./CarContext"; // Make sure to adjust the import path
 
 const Reserve = () => {
-    const { selectedCar } = useCarContext();
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
+  const { selectedCar } = useCarContext();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialValues = {
-    email: '',
-    fullName: '',
-    pickUpDate: '',
-    returnDate: '',
+    email: "",
+    fullName: "",
+    pickUpDate: "",
+    returnDate: "",
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
-    fullName: Yup.string().required('Required'),
-    pickUpDate: Yup.date().min(today, 'Pick-up date cannot be in the past').required('Required'),
+    email: Yup.string().email("Invalid email").required("Required"),
+    fullName: Yup.string().required("Required"),
+    pickUpDate: Yup.date()
+      .min(today, "Pick-up date cannot be in the past")
+      .required("Required"),
     returnDate: Yup.date()
-      .min(Yup.ref('pickUpDate'), 'Return date cannot be before pick-up date')
-      .required('Required'),
+      .min(Yup.ref("pickUpDate"), "Return date cannot be before pick-up date")
+      .required("Required"),
   });
 
   const handleSubmit = (values) => {
     try {
-      // Mimick api request
       console.log("Submitting...");
       setIsLoading(true);
 
       setTimeout(() => {
-        console.log('Form submitted with values:', values);
+        console.log("Form submitted with values:", values);
         setIsLoading(false);
       }, 3000);
     } catch (error) {
@@ -55,7 +56,10 @@ const Reserve = () => {
       } else {
         // Calculate difference in days, ensuring a minimum of 1 day
         const differenceInMilliseconds = returnDate - pickUpDate;
-        const differenceInDays = Math.max(1, Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24)));
+        const differenceInDays = Math.max(
+          1,
+          Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24))
+        );
 
         // Calculate total price based on the difference in days
         const total = selectedCar.price * differenceInDays;
@@ -64,14 +68,13 @@ const Reserve = () => {
     }
   };
 
-
   useEffect(() => {
     // Calculate total price whenever pick-up or return date changes
     calculateTotalPrice(initialValues);
   }, [initialValues]);
 
   return (
-    <div className='flex flex-col lg:flex-row mx-auto w-full pt-12 justify-around px-4 items-center'>
+    <div className="flex flex-col lg:flex-row mx-auto w-full pt-12 justify-around px-4 items-center">
       <div className="max-w-lg w-full p-6 bg-white rounded-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Reservation Form</h2>
         <Formik
@@ -91,7 +94,11 @@ const Reserve = () => {
                   placeholder="Full Name"
                   className="w-full p-2 border rounded"
                 />
-                <ErrorMessage name="fullName" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="fullName"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
               <div className="mb-4">
                 <label htmlFor="email" className="block mb-1">
@@ -103,7 +110,11 @@ const Reserve = () => {
                   placeholder="Email Address"
                   className="w-full p-2 border rounded"
                 />
-                <ErrorMessage name="email" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
               <div className="mb-4">
                 <label htmlFor="pickUpDate" className="block mb-1">
@@ -116,10 +127,17 @@ const Reserve = () => {
                   className="w-full p-2 border rounded"
                   onChange={(e) => {
                     handleChange(e);
-                    calculateTotalPrice({ ...values, pickUpDate: e.target.value });
+                    calculateTotalPrice({
+                      ...values,
+                      pickUpDate: e.target.value,
+                    });
                   }}
                 />
-                <ErrorMessage name="pickUpDate" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="pickUpDate"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
               <div className="mb-4">
                 <label htmlFor="returnDate" className="block mb-1">
@@ -132,31 +150,47 @@ const Reserve = () => {
                   className="w-full p-2 border rounded"
                   onChange={(e) => {
                     handleChange(e);
-                    calculateTotalPrice({ ...values, returnDate: e.target.value });
+                    calculateTotalPrice({
+                      ...values,
+                      returnDate: e.target.value,
+                    });
                   }}
                 />
-                <ErrorMessage name="returnDate" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="returnDate"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
-              <button type="submit" className="px-4 py-2 bg-orange-600 text-white shadow-md shadow-orange-500 hover:shadow-lg hover:shadow-orange-500 duration-500 hover:scale-105 rounded-md">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-orange-600 text-white shadow-md shadow-orange-500 hover:shadow-lg hover:shadow-orange-500 duration-500 hover:scale-105 rounded-md"
+              >
                 {isLoading ? "Submitting..." : "Submit"}
               </button>
-              <div className='text-gray-400 pt-2 text-sm underline'>
-                <Link to='/'>Go Back</Link>
+              <div className="text-gray-400 pt-2 text-sm underline">
+                <Link to="/">Go Back</Link>
               </div>
               <div>
-                <h2 className='text-center font-semibold'>Price per day: ${selectedCar.price}</h2>
-                <h2 className='text-center font-semibold'>Total Price: ${totalPrice}</h2>
+                <h2 className="text-center font-semibold">
+                  Price per day: ${selectedCar.price}
+                </h2>
+                <h2 className="text-center font-semibold">
+                  Total Price: ${totalPrice}
+                </h2>
               </div>
             </Form>
           )}
         </Formik>
       </div>
-      <div className='md:px-8'>
-        <h1 className='text-3xl text-center font-bold pb-4 pt-8 lg:pt-0'>Your Dream Vehicle Awaits!</h1>
+      <div className="md:px-8">
+        <h1 className="text-3xl text-center font-bold pb-4 pt-8 lg:pt-0">
+          Your Dream Vehicle Awaits!
+        </h1>
         <img src={selectedCar.img} width={800} alt="Vehicle" />
       </div>
     </div>
   );
-}
+};
 
 export default Reserve;
